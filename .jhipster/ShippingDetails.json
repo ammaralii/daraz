@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20230313124132",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "shipping_details",
+  "fields": [
+    {
+      "fieldName": "shippingAddress",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "32"
+    },
+    {
+      "fieldName": "shippingMethod",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "4"
+    },
+    {
+      "fieldName": "estimatedDeliveryDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "ShippingDetails",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "orders",
+      "otherEntityRelationshipName": "shippingdetailsOrder",
+      "relationshipName": "order",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "orderDelivery",
+      "otherEntityRelationshipName": "shippingAddress",
+      "relationshipName": "orderdeliveryShippingaddress",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,11 @@
+id;delivery_date;delivery_charge;shipping_status;order_id;shipping_address_id;delivery_manager_id;delivery_boy_id
+1;2023-03-12;67653;grey mesh;1;1;1;1
+2;2023-03-13;9739;index;2;2;2;2
+3;2023-03-13;61721;Versatile;3;3;3;3
+4;2023-03-13;33957;Ball visu;4;4;4;4
+5;2023-03-12;95830;algorithm;5;5;5;5
+6;2023-03-13;29095;transmitt;6;6;6;6
+7;2023-03-12;34266;Tajikista;7;7;7;7
+8;2023-03-13;22414;Plastic M;8;8;8;8
+9;2023-03-13;29952;Facilitat;9;9;9;9
+10;2023-03-13;97905;Front-lin;10;10;10;10

@@ -1,0 +1,110 @@
+package com.venturedive.daraz.service;
+
+import com.venturedive.daraz.domain.OrderDelivery;
+import com.venturedive.daraz.repository.OrderDeliveryRepository;
+import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * Service Implementation for managing {@link OrderDelivery}.
+ */
+@Service
+@Transactional
+public class OrderDeliveryService {
+
+    private final Logger log = LoggerFactory.getLogger(OrderDeliveryService.class);
+
+    private final OrderDeliveryRepository orderDeliveryRepository;
+
+    public OrderDeliveryService(OrderDeliveryRepository orderDeliveryRepository) {
+        this.orderDeliveryRepository = orderDeliveryRepository;
+    }
+
+    /**
+     * Save a orderDelivery.
+     *
+     * @param orderDelivery the entity to save.
+     * @return the persisted entity.
+     */
+    public OrderDelivery save(OrderDelivery orderDelivery) {
+        log.debug("Request to save OrderDelivery : {}", orderDelivery);
+        return orderDeliveryRepository.save(orderDelivery);
+    }
+
+    /**
+     * Update a orderDelivery.
+     *
+     * @param orderDelivery the entity to save.
+     * @return the persisted entity.
+     */
+    public OrderDelivery update(OrderDelivery orderDelivery) {
+        log.debug("Request to update OrderDelivery : {}", orderDelivery);
+        return orderDeliveryRepository.save(orderDelivery);
+    }
+
+    /**
+     * Partially update a orderDelivery.
+     *
+     * @param orderDelivery the entity to update partially.
+     * @return the persisted entity.
+     */
+    public Optional<OrderDelivery> partialUpdate(OrderDelivery orderDelivery) {
+        log.debug("Request to partially update OrderDelivery : {}", orderDelivery);
+
+        return orderDeliveryRepository
+            .findById(orderDelivery.getId())
+            .map(existingOrderDelivery -> {
+                if (orderDelivery.getDeliveryDate() != null) {
+                    existingOrderDelivery.setDeliveryDate(orderDelivery.getDeliveryDate());
+                }
+                if (orderDelivery.getDeliveryCharge() != null) {
+                    existingOrderDelivery.setDeliveryCharge(orderDelivery.getDeliveryCharge());
+                }
+                if (orderDelivery.getShippingStatus() != null) {
+                    existingOrderDelivery.setShippingStatus(orderDelivery.getShippingStatus());
+                }
+
+                return existingOrderDelivery;
+            })
+            .map(orderDeliveryRepository::save);
+    }
+
+    /**
+     * Get all the orderDeliveries.
+     *
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<OrderDelivery> findAll(Pageable pageable) {
+        log.debug("Request to get all OrderDeliveries");
+        return orderDeliveryRepository.findAll(pageable);
+    }
+
+    /**
+     * Get one orderDelivery by id.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Transactional(readOnly = true)
+    public Optional<OrderDelivery> findOne(Long id) {
+        log.debug("Request to get OrderDelivery : {}", id);
+        return orderDeliveryRepository.findById(id);
+    }
+
+    /**
+     * Delete the orderDelivery by id.
+     *
+     * @param id the id of the entity.
+     */
+    public void delete(Long id) {
+        log.debug("Request to delete OrderDelivery : {}", id);
+        orderDeliveryRepository.deleteById(id);
+    }
+}
